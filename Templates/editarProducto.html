@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            ¡Ups! Parece que ha habido un error
+        </div>
+    {% endif %}
+
+    <h1> Actualizacion de Producto </h1>
+
+    <form action="{% url 'actualizarProducto' producto.id %}" method="POST">
+
+        {% csrf_token %}
+        {% if mensaje %}
+            <div class="alert alert-success" role="alert">
+              ¡Producto Actualizado Correctamente!
+            </div>
+        {% endif %}
+
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-danger" href="{% url 'listarProducto' %}">Cancelar</a>
+    </form>
+{% endblock %}

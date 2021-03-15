@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            ¡Ups! Parece que ha habido un error
+        </div>
+    {% endif %}
+
+    <h1> Registro de Marcas </h1>
+
+    <form action="{% url 'guardarMarca' %}" method="POST">
+
+        {% csrf_token %}
+        {% if mensaje %}
+            <div class="alert alert-success" role="alert">
+              ¡Marca Registrada Correctamente!
+            </div>
+        {% endif %}
+
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-danger" href="{% url 'listarMarca' %}">Cancelar</a>
+    </form>
+{% endblock %}
